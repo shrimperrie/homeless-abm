@@ -31,32 +31,41 @@ to setup
   ]
 
   ;; updating places size according number of humans there
-  ask places [set size count turtles-here]
+  ask places [set size count turtles-here set label count turtles-here - 1]
 
   ;; updating humans hapinnes
   ask humans [set happy? ressolve-hapiness]
 
+  ;; initialize tick counter
   reset-ticks
 end
 
-to-report ressolve-hapiness
 
-  report false
+
+to-report ressolve-hapiness
+  let c [capacity] of one-of places-here
+  let a [attraction] of one-of places-here
+  let r [repulsion] of one-of places-here
+  let cap? ((c + tolerance  >= count humans-here) and (count humans-here < tolerance-capacity + tolerance ))
+  let att? a + tolerance > desired-attraction
+  let rep? r < tolerance-repulsion + tolerance
+  report (cap? and att?) or (cap? and rep?) or (att? and rep?)  ;; 2 out of 3 parameters must fit to make agent happy
 end
 
-to go
 
+
+to go
+  ;; Unhappy humans find new connected place
   ask humans [if not happy? [move-to one-of [link-neighbors] of one-of places-here]]
 
-  ; updating places size according number of humans there
-  ask places [set size count turtles-here]
+  ;; updating places size according number of humans there
+  ask places [set size count turtles-here set label count turtles-here - 1]
 
   ;; updating humans hapinnes
   ask humans [set happy? ressolve-hapiness]
 
-
+  ;; advancing tick counter
   tick
-
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -161,7 +170,7 @@ N-places
 N-places
 10
 100
-10.0
+30.0
 1
 1
 NIL
@@ -176,7 +185,7 @@ places-connectivity
 places-connectivity
 1
 50
-3.0
+2.0
 1
 1
 NIL
@@ -191,7 +200,7 @@ long-connections
 long-connections
 0
 0.5
-0.3
+0.4
 0.1
 1
 NIL
@@ -200,8 +209,8 @@ HORIZONTAL
 PLOT
 780
 33
-980
-183
+1179
+387
 Hapines over time
 NIL
 NIL
@@ -214,6 +223,32 @@ false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" "plot count humans with [happy?]"
+
+MONITOR
+794
+402
+910
+447
+N of happy agents
+count humans with [happy?]
+17
+1
+11
+
+SLIDER
+8
+204
+180
+237
+tolerance
+tolerance
+0
+100
+2.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
