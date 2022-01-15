@@ -46,12 +46,13 @@ end
 
 to go
 
-  ask humans [
-    if not happy? [
-      let dest one-of [link-neighbors] of one-of places-here
-      print dest
-      move-to dest]
-  ]
+  ask humans [if not happy? [move-to one-of [link-neighbors] of one-of places-here]]
+
+  ; updating places size according number of humans there
+  ask places [set size count turtles-here]
+
+  ;; updating humans hapinnes
+  ask humans [set happy? ressolve-hapiness]
 
 
   tick
@@ -145,7 +146,7 @@ N-humans
 N-humans
 50
 1000
-50.0
+250.0
 1
 1
 NIL
