@@ -3,23 +3,58 @@ extensions [nw]
 breed [places place]
 breed [humans human]
 places-own [capacity attraction repulsion]
-humans-own [tolerance-capacity desired-attraction tolerance-repulsion]
+humans-own [tolerance-capacity desired-attraction tolerance-repulsion happy?]
 
 
 to setup
   ca ;; erase everything
   set-default-shape places "house"
+  set-default-shape humans "person"
 
   ;; Initializing network of places in the city
-  nw:generate-watts-strogatz places links N-places places-connectivity long-connections [fd 45 set size 5]
+  nw:generate-watts-strogatz places links N-places places-connectivity long-connections [
+    fd 45
+    set size 5
+    set capacity 5 + random 21
+    set attraction random 101
+    set repulsion random 101
+  ]
 
+  ;; Initializing people
+  create-humans N-humans [
+    set size 3
+    set color white
+    move-to one-of places
+    set tolerance-capacity 5 + random 21
+    set desired-attraction random 101
+    set tolerance-repulsion random 101
+  ]
+
+  ;; updating places size according number of humans there
+  ask places [set size count turtles-here]
+
+  ;; updating humans hapinnes
+  ask humans [set happy? ressolve-hapiness]
+
+  reset-ticks
 end
 
+to-report ressolve-hapiness
 
-
+  report false
+end
 
 to go
 
+  ask humans [
+    if not happy? [
+      let dest one-of [link-neighbors] of one-of places-here
+      print dest
+      move-to dest]
+  ]
+
+
+  tick
 
 end
 @#$#@#$#@
@@ -125,7 +160,7 @@ N-places
 N-places
 10
 100
-20.0
+10.0
 1
 1
 NIL
@@ -160,6 +195,24 @@ long-connections
 1
 NIL
 HORIZONTAL
+
+PLOT
+780
+33
+980
+183
+Hapines over time
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot count humans with [happy?]"
 
 @#$#@#$#@
 ## WHAT IS IT?
