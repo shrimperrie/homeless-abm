@@ -31,7 +31,7 @@ to setup
   ]
 
   ;; updating places size according number of humans there
-  ask places [set size count turtles-here set label count turtles-here - 1]
+  ask places [set size count turtles-here set label capacity]
 
   ;; updating humans hapinnes
   ask humans [set happy? ressolve-hapiness]
@@ -59,7 +59,7 @@ to go
   ask humans [if not happy? [move-to one-of [link-neighbors] of one-of places-here]]
 
   ;; updating places size according number of humans there
-  ask places [set size count turtles-here set label count turtles-here - 1]
+  ask places [set size count turtles-here]
 
   ;; updating humans hapinnes
   ask humans [set happy? ressolve-hapiness]
