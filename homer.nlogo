@@ -97,6 +97,36 @@ NIL
 NIL
 1
 
+SLIDER
+9
+53
+181
+86
+N-humans
+N-humans
+50
+1000
+50.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+9
+93
+181
+126
+N-places
+N-places
+10
+100
+20.0
+1
+1
+NIL
+HORIZONTAL
+
 @#$#@#$#@
 ## WHAT IS IT?
 

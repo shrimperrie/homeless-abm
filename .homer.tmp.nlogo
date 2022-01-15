@@ -3,7 +3,7 @@ extensions [nw]
 breed [places place]
 breed [humans human]
 places-own [capacity attraction repulsion]
-humans-own [t]
+humans-own [tolerance-capacity desired-attraction tolerance-repulsion]
 
 
 to setup
@@ -45,6 +45,21 @@ GRAPHICS-WINDOW
 1
 ticks
 30.0
+
+SLIDER
+0
+0
+0
+0
+NIL
+NIL
+0
+100
+50.0
+1
+1
+NIL
+HORIZONTAL
 
 BUTTON
 6
