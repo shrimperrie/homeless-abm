@@ -7,7 +7,11 @@ humans-own [tolerance-capacity desired-attraction tolerance-repulsion]
 
 
 to setup
+  ca ;; erase everything
+  set-default-shape places "house"
 
+  ;; Initializing network of places in the city
+  nw:generate-watts-strogatz places links N-places places-connectivity long-connections [fd 45 set size 5]
 
 end
 
@@ -22,24 +26,24 @@ end
 GRAPHICS-WINDOW
 210
 10
-647
-448
+723
+524
 -1
 -1
-13.0
+5.0
 1
 10
 1
 1
 1
 0
+0
+0
 1
-1
-1
--16
-16
--16
-16
+-50
+50
+-50
+50
 0
 0
 1
@@ -136,7 +140,7 @@ places-connectivity
 places-connectivity
 1
 50
-5.0
+3.0
 1
 1
 NIL
@@ -151,7 +155,7 @@ long-connections
 long-connections
 0
 0.5
-0.05
+0.3
 0.1
 1
 NIL
