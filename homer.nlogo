@@ -127,6 +127,36 @@ N-places
 NIL
 HORIZONTAL
 
+SLIDER
+8
+127
+180
+160
+places-connectivity
+places-connectivity
+1
+50
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+8
+161
+180
+194
+long-connections
+long-connections
+0
+0.5
+0.05
+0.1
+1
+NIL
+HORIZONTAL
+
 @#$#@#$#@
 ## WHAT IS IT?
 
