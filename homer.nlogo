@@ -66,6 +66,9 @@ to go
 
   ;; advancing tick counter
   tick
+
+  ;; stopping condition
+  if count humans with [not happy?] = 0 [stop]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -200,8 +203,8 @@ long-connections
 long-connections
 0
 0.5
-0.4
-0.1
+0.03
+0.01
 1
 NIL
 HORIZONTAL
@@ -244,7 +247,7 @@ tolerance
 tolerance
 0
 100
-2.0
+4.0
 1
 1
 NIL
