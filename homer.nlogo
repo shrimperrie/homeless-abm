@@ -3,7 +3,7 @@ extensions [nw]
 breed [places place]
 breed [humans human]
 places-own [capacity attraction repulsion]
-humans-own []
+humans-own [tolerance-capacity desired-attraction tolerance-repulsion]
 
 
 to setup

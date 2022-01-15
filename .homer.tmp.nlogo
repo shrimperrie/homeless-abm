@@ -1,9 +1,9 @@
 extensions [nw]
 
-breed [places ]
+breed [places place]
 breed [humans human]
-cities-own [capacity attraction repulsion]
-humans-own []
+places-own [capacity attraction repulsion]
+humans-own [t]
 
 
 to setup
