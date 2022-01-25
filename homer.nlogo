@@ -1,3 +1,20 @@
+;; Model from project HOMER -- seeded at Complexity Weekend, November 2021
+;; Model is hosted at: https://github.com/shrimperrie/homeless-abm
+;;
+;; This is the first very tiny step in very long journey towards complex model of homeless people behavior:
+;; Here we generate places and homeless people try to settle on them and set informal encampments.
+;; Places have their attractiveness, their repulsion and capacity, homeless people have their
+;; minimal demanded attractiveness, maximal tolerated repulsion, and tolerance toward number of people surrounding them at the place.
+;; Homeless people them seeking place which is enough attractive, not too much repulsive,
+;; with not overflowen capacity, with less people they are tolerant of, but also with at least some person.
+;; I.e., places are meeteng three criteria: attractivity, repulsion and right number of people.
+;; People dissatisfied with place moving randomly to another place connected with the current one by the link.
+;; places are connected by small-world network of Watts-Strogatz.
+;;
+
+;; Last edited: 2022-01-25 FranČesko
+
+
 extensions [nw]
 
 breed [places place]
@@ -46,7 +63,7 @@ to-report ressolve-hapiness
   let c [capacity] of one-of places-here    ;; There are just one place, but 'one-of' gives back the value, 'of' gives the same only one value, but as a list.
   let a [attraction] of one-of places-here
   let r [repulsion] of one-of places-here
-  let cap? ((c + tolerance  >= count humans-here) and (count humans-here < tolerance-capacity + tolerance ))
+  let cap? ((c + tolerance  >= count humans-here) and (count humans-here < tolerance-capacity + tolerance ) and (any? other humans-here))
   let att? a + tolerance > desired-attraction
   let rep? r < tolerance-repulsion + tolerance
   report (cap? and att?) or (cap? and rep?) or (att? and rep?)  ;; 2 out of 3 parameters must fit to make agent happy
@@ -174,7 +191,7 @@ N-places
 N-places
 10
 100
-40.0
+100.0
 1
 1
 NIL
@@ -263,7 +280,7 @@ max-ticks
 max-ticks
 0
 10000
-500.0
+365.0
 100
 1
 NIL
