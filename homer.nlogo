@@ -191,7 +191,7 @@ N-places
 N-places
 10
 100
-100.0
+30.0
 1
 1
 NIL
@@ -265,7 +265,7 @@ tolerance
 tolerance
 0
 100
-0.0
+1.0
 1
 1
 NIL
@@ -285,6 +285,17 @@ max-ticks
 1
 NIL
 HORIZONTAL
+
+MONITOR
+927
+402
+1013
+447
+Sum capacity
+sum [capacity] of places
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
