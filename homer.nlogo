@@ -13,7 +13,7 @@ to setup
 
   ;; Initializing network of places in the city
   nw:generate-watts-strogatz places links N-places places-connectivity long-connections [
-    fd 45
+    fd 40
     set size 5
     set capacity 5 + random 21
     set attraction random 101
@@ -31,7 +31,7 @@ to setup
   ]
 
   ;; updating places size according number of humans there
-  ask places [set size count turtles-here set label capacity]
+  ask places [set size (count turtles-here) - 1 set label capacity]
 
   ;; updating humans hapinnes
   ask humans [set happy? ressolve-hapiness]
@@ -43,7 +43,7 @@ end
 
 
 to-report ressolve-hapiness
-  let c [capacity] of one-of places-here
+  let c [capacity] of one-of places-here    ;; There are just one place, but 'one-of' gives back the value, 'of' gives the same only one value, but as a list.
   let a [attraction] of one-of places-here
   let r [repulsion] of one-of places-here
   let cap? ((c + tolerance  >= count humans-here) and (count humans-here < tolerance-capacity + tolerance ))
@@ -59,7 +59,7 @@ to go
   ask humans [if not happy? [move-to one-of [link-neighbors] of one-of places-here]]
 
   ;; updating places size according number of humans there
-  ask places [set size count turtles-here]
+  ask places [set size (count turtles-here) - 1 set label size]
 
   ;; updating humans hapinnes
   ask humans [set happy? ressolve-hapiness]
@@ -69,16 +69,17 @@ to go
 
   ;; stopping condition
   if count humans with [not happy?] = 0 [stop]
+  if ticks = max-ticks [stop]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
 10
-723
-524
+770
+571
 -1
 -1
-5.0
+5.47
 1
 10
 1
@@ -99,9 +100,9 @@ ticks
 30.0
 
 BUTTON
-6
+140
 10
-69
+203
 43
 GO!
 go
@@ -133,9 +134,9 @@ NIL
 1
 
 BUTTON
-140
+2
 10
-207
+69
 43
 SETUP
 setup
@@ -173,7 +174,7 @@ N-places
 N-places
 10
 100
-30.0
+40.0
 1
 1
 NIL
@@ -247,8 +248,23 @@ tolerance
 tolerance
 0
 100
-4.0
+0.0
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+12
+253
+184
+286
+max-ticks
+max-ticks
+0
+10000
+500.0
+100
 1
 NIL
 HORIZONTAL
